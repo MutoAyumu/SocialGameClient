@@ -25,4 +25,9 @@ namespace Outgame
         public APIResponceQuestResult QuestResult { get; set; }
     }
 
+    public class EventPackage : SequencePackage
+    {
+        
+    }
+
 }
