@@ -52,6 +52,10 @@ namespace Outgame
             UIManager.StackView(ViewID.Information);
         }
 
+        public void GoEvent()
+        {
+            UIManager.NextView(ViewID.Event);
+        }
 
 
         public void DialogTest()
