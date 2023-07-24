@@ -62,10 +62,4 @@ namespace Outgame
     {
         public APIResponceQuest[] quests;
     }
-
-    [Serializable]
-    public class APIResponceGetAllLeaderboard : APIResponceBase
-    {
-        public APIResponceEventPoint[] users;
-    }
 }

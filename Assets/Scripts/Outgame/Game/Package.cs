@@ -25,9 +25,9 @@ namespace Outgame
         public APIResponceQuestResult QuestResult { get; set; }
     }
 
-    public class EventPackage : SequencePackage
+    public class LeaderboardPackage : SequencePackage
     {
-        
+        public APIResponceGetAllLeaderboard Leaderboard { get; set; }
     }
 
 }
