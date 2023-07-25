@@ -38,13 +38,6 @@ namespace Outgame
         public int clearFlag;
     }
 
-    public class APIResponceEventPoint
-    {
-        public int point;
-        public string userName;
-    }
-
-
     [Serializable]
     public class APIResponceGetCards : APIResponceBase
     {

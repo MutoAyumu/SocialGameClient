@@ -16,20 +16,25 @@ namespace Outgame
     }
 
     [Serializable]
+    public class APIResponceEventPoint
+    {
+        public int point;
+        public string name;
+    }
+
+    [Serializable]
     public class APIResponceGetAllLeaderboard : APIResponceBase
     {
-        public APIResponceEventPoint[] users;
+        public APIResponceEventPoint[] leaderboard;
     }
 
     public partial class NodeJSImplement : IGameAPIImplement
     {
         public async UniTask<APIResponceGetAllLeaderboard> GetAllLeaderboard()
         {
-            string request = string.Format("{0}/leaderboard/postreq", GameSetting.GameAPIURI);
+            string request = string.Format("{0}/leaderboard/allLeaderboard", GameSetting.GameAPIURI);
 
-            var leaderboard = CreateRequest<APIRequestLeaderboard>();
-
-            string json = await PostRequest(request, leaderboard);
+            string json = await GetRequest(request);
             var res = GetPacketBody<APIResponceGetAllLeaderboard>(json);
             return res;
         }
