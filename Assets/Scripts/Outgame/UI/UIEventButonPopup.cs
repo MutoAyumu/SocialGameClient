@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIEventinfoPopup : MonoBehaviour
+public class UIEventButonPopup : MonoBehaviour
 {
     [SerializeField] Button _eventButton;
 

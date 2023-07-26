@@ -26,12 +26,13 @@ public class UIEventView : UIStackableView
 
         SequenceBridge.RegisterSequence("Leaderboard", SequencePackage.Create<LeaderboardPackage>(UniTask.RunOnThreadPool(async () =>
         {
-            var loginPackage = SequenceBridge.GetSequencePackage<LoginPackage>("Login");
+            var id = UserModel.PlayerInfo.Id;
+            var name = UserModel.PlayerInfo.Name;
 
-            var leaderboard = await GameAPI.API.EventUserCheck(loginPackage.Login.name, loginPackage.Login.id);
+            var leaderboard = await GameAPI.API.EventUserCheck(name, id);
 
-            var rankPackage = SequenceBridge.GetSequencePackage<LeaderboardPackage>("Leaderboard");
-            rankPackage.User = leaderboard;
+            var package = SequenceBridge.GetSequencePackage<LeaderboardPackage>("Leaderboard");
+            package.User = leaderboard;
         })));
     }
 
@@ -58,6 +59,10 @@ public class UIEventView : UIStackableView
 
     public void GoEventQuest()
     {
+        var evn = EventHelper.GetAllOpenedEvent();
+
+        if (MasterData.GetEvent(evn[0]).GameEndAt < System.DateTime.Now) return;
+
         UIManager.NextView(ViewID.EventQuest);
     }
 }

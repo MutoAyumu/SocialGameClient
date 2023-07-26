@@ -10,6 +10,7 @@ namespace Outgame
     {
         [SerializeField] GameObject _prefab;
         [SerializeField] TMPro.TextMeshProUGUI _userRankText;
+        [SerializeField] int _showRankingUser = 10;
 
         private void Start()
         {
@@ -32,12 +33,14 @@ namespace Outgame
 
         void CreateBoard()
         {
-            var rankingPackage = SequenceBridge.GetSequencePackage<LeaderboardPackage>("Leaderboard");
+            var package = SequenceBridge.GetSequencePackage<LeaderboardPackage>("Leaderboard");
 
-            var userList = rankingPackage.Users.leaderboard.OrderBy(x => x.point).ToArray();
+            //このままはアカン
+            var userList = package.Users.leaderboard.OrderBy(x => x.point).ToArray();
             var length = userList.Length;
 
-            for (int i = 0; i < 10; ++i)
+            //サーバー側でランキングを作って渡すことが出来るなら試してみる
+            for (int i = 0; i < _showRankingUser; ++i)
             {
                 if (i >= length) break;
 
@@ -47,14 +50,13 @@ namespace Outgame
                 item.SetupLeaderboard($"{i + 1}位 : {userList[i].name}:{userList[i].point}ポイント");
             }
 
-            var loginPackage = SequenceBridge.GetSequencePackage<LoginPackage>("Login");
-            var id = loginPackage.Login.id;
+            var id = UserModel.PlayerInfo.Id;
             
             for (int i = 0; i < length; ++i)
             {
                 if (userList[i].id != id) continue;
 
-                _userRankText.text = $"{i + 1}順位";
+                _userRankText.text = $"{i + 1}位";
                 break;
             }
         }
