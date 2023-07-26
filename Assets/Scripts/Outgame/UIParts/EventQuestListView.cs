@@ -1,4 +1,4 @@
-ï»¿using MD;
+using MD;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,9 +10,9 @@ using UnityEngine;
 namespace Outgame
 {
     /// <summary>
-    /// ã‚¯ã‚¨ã‚¹ãƒˆãƒªã‚¹ãƒˆã‚’è¡¨ç¤ºã™ã‚‹ãƒ“ãƒ¥ãƒ¼
+    /// ƒNƒGƒXƒgƒŠƒXƒg‚ğ•\¦‚·‚éƒrƒ…[
     /// </summary>
-    public class QuestListView : ListView
+    public class EventQuestListView : ListView
     {
         public delegate void Ready(int questId);
         [SerializeField] GameObject _chapterPrefab;
@@ -31,7 +31,7 @@ namespace Outgame
 
 
         /// <summary>
-        /// ãƒ“ãƒ¥ãƒ¼ã‚’ä½œã‚‹
+        /// ƒrƒ…[‚ğì‚é
         /// </summary>
         public override void Setup()
         {
@@ -43,11 +43,11 @@ namespace Outgame
             var questList = QuestListModel.QuestList.List;
             var count = 0;
 
-            //ãƒãƒ£ãƒ—ã‚¿ãƒ¼ã¨ãã®å­ä¾›ã«ãªã‚‹ã‚¯ã‚¨ã‚¹ãƒˆã‚’ãƒªã‚¹ãƒˆã«å…¥ã‚Œã‚‹
+            //ƒ`ƒƒƒvƒ^[‚Æ‚»‚Ìq‹Ÿ‚É‚È‚éƒNƒGƒXƒg‚ğƒŠƒXƒg‚É“ü‚ê‚é
             for (int i = 0; i < chapters.Count; ++i)
             {
-                //IDãŒ100ä»¥é™ã¯ã‚¤ãƒ™ãƒ³ãƒˆã‚¯ã‚¨ã‚¹ãƒˆã¨ã™ã‚‹
-                if (chapters[i].Id >= 100) continue;
+                //ID‚ª100ˆÈã‚Í’ÊíƒNƒGƒXƒg‚Æ‚·‚é
+                if (chapters[i].Id < 100) continue;
 
                 var chapter = GameObject.Instantiate(_chapterPrefab, _content.RectTransform);
                 var listItem = ListItemBase.ListItemSetup<ListItemChapterBoard>(count, chapter, (int evtId, int index) => OnItemClick(evtId, index));
@@ -58,7 +58,7 @@ namespace Outgame
 
                 _childList.Add(new List<GameObject>());
 
-                //ã‚¯ã‚¨ã‚¹ãƒˆã¯éè¡¨ç¤ºã§ä½œã‚‹
+                //ƒNƒGƒXƒg‚Í”ñ•\¦‚Åì‚é
                 for (int q = 0; q < chapters[i].QuestList.Count; ++q)
                 {
                     var quest = GameObject.Instantiate(_questPrefab, _content.RectTransform);
@@ -76,11 +76,11 @@ namespace Outgame
                 count++;
             }
 
-            //ã‚µã‚¤ã‚ºè¨ˆç®—ã—ã¦æœ€å¤§ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«å€¤ã‚’æ±ºã‚ã‚‹
-            //ã‚¯ã‚¨ã‚¹ãƒˆã¯ã‚µã‚¤ã‚ºå¯å¤‰ã™ã‚‹ã®ã§æ¯å›å†è¨ˆç®—ã™ã‚‹
+            //ƒTƒCƒYŒvZ‚µ‚ÄÅ‘åƒXƒNƒ[ƒ‹’l‚ğŒˆ‚ß‚é
+            //ƒNƒGƒXƒg‚ÍƒTƒCƒY‰Â•Ï‚·‚é‚Ì‚Å–ˆ‰ñÄŒvZ‚·‚é
             _content.RectTransform.sizeDelta = new Vector2(800, (_lineList.Where(go => go.activeSelf).Count() + 1) * CardUIHeight);
 
-            //ã‚¤ãƒ™ãƒ³ãƒˆç™»éŒ²
+            //ƒCƒxƒ“ƒg“o˜^
             _rect.onValueChanged.AddListener(ScrollUpdate);
         }
 
@@ -93,25 +93,25 @@ namespace Outgame
 
         protected override void OnItemClick(int evtId, int index)
         {
-            switch((BoardType)evtId)
+            switch ((BoardType)evtId)
             {
-                //ãƒãƒ£ãƒ—ã‚¿ãƒ¼ã‚’æŠ¼ã—ãŸå ´åˆã¯ã‚¯ã‚¨ã‚¹ãƒˆã‚’å‡ºã™
+                //ƒ`ƒƒƒvƒ^[‚ğ‰Ÿ‚µ‚½ê‡‚ÍƒNƒGƒXƒg‚ğo‚·
                 case BoardType.Chapter:
                     {
-                        //éè¡¨ç¤ºåˆ‡æ›¿
+                        //”ñ•\¦Ø‘Ö
                         _childList[index].ForEach(c => c.SetActive(!c.activeSelf));
 
-                        //ã‚µã‚¤ã‚ºè¨ˆç®—ã—ã¦æœ€å¤§ã‚¹ã‚¯ãƒ­ãƒ¼ãƒ«å€¤ã‚’æ±ºã‚ã‚‹
-                        //ã‚¯ã‚¨ã‚¹ãƒˆã¯ã‚µã‚¤ã‚ºå¯å¤‰ã™ã‚‹ã®ã§æ¯å›å†è¨ˆç®—ã™ã‚‹
+                        //ƒTƒCƒYŒvZ‚µ‚ÄÅ‘åƒXƒNƒ[ƒ‹’l‚ğŒˆ‚ß‚é
+                        //ƒNƒGƒXƒg‚ÍƒTƒCƒY‰Â•Ï‚·‚é‚Ì‚Å–ˆ‰ñÄŒvZ‚·‚é
                         _content.RectTransform.sizeDelta = new Vector2(800, (_lineList.Where(go => go.activeSelf).Count() + 1) * CardUIHeight);
                     }
                     break;
 
-                //å‡ºæ’ƒç¢ºèª
+                //oŒ‚Šm”F
                 case BoardType.Quest:
                     {
                         _selectedQuestId = _questList[index].QuestId;
-                        UICommonDialog.OpenYesNoDialog("å‡ºæ’ƒã—ã¾ã™", "ã‚ˆã‹ã£ãŸã‚‰OK", DialogDecide, "UIGoQuest", "UINoQuest");
+                        UICommonDialog.OpenYesNoDialog("oŒ‚‚µ‚Ü‚·", "‚æ‚©‚Á‚½‚çOK", DialogDecide, "UIGoQuest", "UINoQuest");
                     }
                     break;
             }

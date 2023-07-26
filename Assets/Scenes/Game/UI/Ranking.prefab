@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000052565898}
+  m_AnchoredPosition: {x: 0, y: -0.00002070834}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &6792444156863779709
@@ -60,7 +60,7 @@ MonoBehaviour:
   m_Spacing: 5
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
-  m_ChildControlWidth: 0
+  m_ChildControlWidth: 1
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
@@ -838,7 +838,8 @@ MonoBehaviour:
   _line: {fileID: 0}
   _card: {fileID: 0}
   _content: {fileID: 5788781389767238702}
-  _prefab: {fileID: 0}
+  _prefab: {fileID: 5903359624676300840, guid: 7327742af87227345b74068b46bc9a6c, type: 3}
+  _userRankText: {fileID: 5339992503353101573}
 --- !u!1 &6329722338107930967
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,7 +1278,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 435663193302235781}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9999937
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

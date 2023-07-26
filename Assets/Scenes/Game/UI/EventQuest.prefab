@@ -103,7 +103,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isActive: 0
-  _listView: {fileID: 3098763351359801249}
+  _listView: {fileID: 3518010188586429635}
 --- !u!1 &855190382102567025
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,7 +193,7 @@ GameObject:
   - component: {fileID: 4512032324963503109}
   - component: {fileID: 1485058030360705205}
   - component: {fileID: 7937359728381703398}
-  - component: {fileID: 3098763351359801249}
+  - component: {fileID: 3518010188586429635}
   m_Layer: 5
   m_Name: Scroll View
   m_TagString: Untagged
@@ -304,7 +304,7 @@ CanvasGroup:
   m_Interactable: 1
   m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
---- !u!114 &3098763351359801249
+--- !u!114 &3518010188586429635
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -313,7 +313,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2126428156334597832}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a39968d95cf5ec9429a21a1dd538cbbe, type: 3}
+  m_Script: {fileID: 11500000, guid: b063f54b95b3091499377ff34743f2e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _rect: {fileID: 1485058030360705205}
@@ -798,7 +798,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 5792942579985893054}
   m_Direction: 2
   m_Value: 0
-  m_Size: 0.99999535
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -988,7 +988,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000016549964}
+  m_AnchoredPosition: {x: 0, y: 0.00003591467}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &589118541634842438

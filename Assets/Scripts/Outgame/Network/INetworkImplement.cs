@@ -21,4 +21,5 @@ public interface IGameAPIImplement
     UniTask<APIResponceQuestStart> QuestStart(int questId);
     UniTask<APIResponceQuestResult> QuestResult(int result);
     UniTask<APIResponceGetAllLeaderboard> GetAllLeaderboard();
+    UniTask<APIResponceEventUserCheck> EventUserCheck(string name, int id);
 }

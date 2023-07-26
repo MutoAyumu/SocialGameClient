@@ -27,7 +27,8 @@ namespace Outgame
 
     public class LeaderboardPackage : SequencePackage
     {
-        public APIResponceGetAllLeaderboard Leaderboard { get; set; }
+        public APIResponceGetAllLeaderboard Users { get; set; }
+        public APIResponceEventUserCheck User { get; set; }
     }
 
 }

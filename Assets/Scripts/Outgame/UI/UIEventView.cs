@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using MD;
+using Cysharp.Threading.Tasks;
 
 public class UIEventView : UIStackableView
 {
@@ -22,6 +23,16 @@ public class UIEventView : UIStackableView
 
         var name = MasterData.GetEvent(evn[0]).Name;
         _eventText.text = name;
+
+        SequenceBridge.RegisterSequence("Leaderboard", SequencePackage.Create<LeaderboardPackage>(UniTask.RunOnThreadPool(async () =>
+        {
+            var loginPackage = SequenceBridge.GetSequencePackage<LoginPackage>("Login");
+
+            var leaderboard = await GameAPI.API.EventUserCheck(loginPackage.Login.name, loginPackage.Login.id);
+
+            var rankPackage = SequenceBridge.GetSequencePackage<LeaderboardPackage>("Leaderboard");
+            rankPackage.User = leaderboard;
+        })));
     }
 
     public override void Enter()

@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 namespace Outgame
 {
     public class ListItemLeaderboard : ListItemBase
     {
-        [SerializeField] TMPro.TextMeshPro _text;
+        [SerializeField] TextMeshProUGUI _text;
 
         public void SetupLeaderboard(string text)
         {

@@ -9,6 +9,7 @@ namespace Outgame
     public class LeaderboardListView : ListView
     {
         [SerializeField] GameObject _prefab;
+        [SerializeField] TMPro.TextMeshProUGUI _userRankText;
 
         private void Start()
         {
@@ -22,7 +23,7 @@ namespace Outgame
                 var package = SequenceBridge.GetSequencePackage<LeaderboardPackage>("Leaderboard");
 
                 var leaderboard = await GameAPI.API.GetAllLeaderboard();
-                package.Leaderboard = leaderboard;
+                package.Users = leaderboard;
 
                 UniTask.Post(CreateBoard);
                 //‚Ü‚¾‚â‚é‚æ
@@ -31,18 +32,31 @@ namespace Outgame
 
         void CreateBoard()
         {
-            //_user = _user.OrderBy(x => x.point).ToArray();
-            //var length = _user.Length;
+            var rankingPackage = SequenceBridge.GetSequencePackage<LeaderboardPackage>("Leaderboard");
 
-            //for (int i = 0; i < 10; ++i)
-            //{
-            //    if (i > length) break;
+            var userList = rankingPackage.Users.leaderboard.OrderBy(x => x.point).ToArray();
+            var length = userList.Length;
 
-            //    var go = Instantiate(_prefab, _content.RectTransform);
-            //    var item = go.GetComponent<ListItemLeaderboard>();
+            for (int i = 0; i < 10; ++i)
+            {
+                if (i >= length) break;
 
-            //    item.SetupLeaderboard($"{_user[i]}:{_user[i].userName}");
-            //}
+                var go = Instantiate(_prefab, _content.RectTransform);
+                var item = go.GetComponent<ListItemLeaderboard>();
+
+                item.SetupLeaderboard($"{i + 1}ˆÊ : {userList[i].name}:{userList[i].point}ƒ|ƒCƒ“ƒg");
+            }
+
+            var loginPackage = SequenceBridge.GetSequencePackage<LoginPackage>("Login");
+            var id = loginPackage.Login.id;
+            
+            for (int i = 0; i < length; ++i)
+            {
+                if (userList[i].id != id) continue;
+
+                _userRankText.text = $"{i + 1}‡ˆÊ";
+                break;
+            }
         }
     }
 }
